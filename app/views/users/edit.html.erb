@@ -1,9 +1,9 @@
-<% provide(:title, 'アカウント作成') %>
-<h1>アカウント作成</h1>
+<% provide(:title, '更新ページ') %>
+<h1>アカウント情報の更新</h1>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_with(model: @user, local: true) do |f| %>
+    <!--<%= form_with(model: @user, local: true) do |f| %>-->
       <%= render 'shared/error_messages' %>
     
       <%= f.label :name, class: "label-signup" %>
@@ -21,7 +21,7 @@
       <%= f.label :password_confirmation, class: "label-signup" %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
 
-      <%= f.submit "新規作成", class: "btn btn-primary btn-block btn-signup" %>
+      <%= f.submit "更新", class: "btn btn-primary btn-block btn-signup" %>
     <% end %>
   </div>
 </div>
