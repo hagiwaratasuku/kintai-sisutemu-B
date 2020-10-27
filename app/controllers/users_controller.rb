@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy, :edit_basic_info, :update_basic_info]
   before_action :correct_user, only: [:edit, :update]
-  before_action :admin_user, only: :destroy
+  before_action :admin_user, only: [:destroy, :edit_basic_info, :update_basic_info]
   
   def index
     @users = User.paginate(page: params[:page])
@@ -44,6 +44,11 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def edit_basic_info
+  end
+  
+  def update_basic_info
+  end
   
   private
     
@@ -59,6 +64,7 @@ class UsersController < ApplicationController
     # ログイン済みのユーザーか確認します。
     def logged_in_user
       unless logged_in?
+        store_location
         flash[:danger] = "ログインしてください。"
         redirect_to login_url
       end
@@ -66,7 +72,6 @@ class UsersController < ApplicationController
     
     # アクセスしたユーザーが現在ログインしているユーザーか確認します。
     def correct_user
-      @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
     end
     
